@@ -2,8 +2,9 @@ import React from 'react';
 import {Button, Col, Row} from "react-bootstrap";
 import DataService from "../../services/DataService";
 import {useStore} from "../../state/storeHooks";
-import {loadEpisodes} from "../EpisodesList/EpisodesListSlice";
+import {loadEpisodes, sortByEpisodeNumber} from "../EpisodesList/EpisodesListSlice";
 import {store} from "../../state/store";
+import {IEpisode} from "../../types/episode";
 
 const FetchDataButtonsGroup = () => {
     const {episodes} = useStore(({list}) => list)
@@ -24,8 +25,11 @@ export default FetchDataButtonsGroup;
 
 async function load(){
     try {
-       store.dispatch(loadEpisodes(await DataService.fetchData()))
+        const episodes = await DataService.fetchData()
+       store.dispatch(loadEpisodes(episodes))
+        store.dispatch(sortByEpisodeNumber())
     } catch (e) {
         console.log(e) //TODO Errors
     }
 }
+

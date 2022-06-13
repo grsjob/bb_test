@@ -36,10 +36,27 @@ const slice = createSlice({
                 return episode
             })
         },
+        sortByEpisodeNumber:(state) =>{
+            state.episodes = state.episodes.sort((a,b)=> Number(a.episode) - Number(b.episode))
+        },
+        sortByCharactersDown:(state) =>{
+            state.episodes = state.episodes.sort((a,b)=> b.characters.length - a.characters.length)
+        },
+        sortByCharactersUp:(state) =>{
+            state.episodes = state.episodes.sort((a,b)=> a.characters.length - b.characters.length)
+        },
     }
 })
 
-export const {loadEpisodes, deleteEpisode, addCharacter, deleteCharacter} = slice.actions
+export const {
+    loadEpisodes,
+    deleteEpisode,
+    addCharacter,
+    deleteCharacter,
+    sortByEpisodeNumber,
+    sortByCharactersUp,
+    sortByCharactersDown
+} = slice.actions
 export default slice.reducer
 
 function getCharacterFullName(){
