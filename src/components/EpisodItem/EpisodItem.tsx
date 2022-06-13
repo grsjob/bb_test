@@ -14,7 +14,7 @@ const EpisodeItem: FC<EpisodeItem> = ({episode}) => {
         <ListGroup.Item className="d-flex justify-content-between align-items-center">
             <div className="d-flex flex-column">
                 <h2>Сезон №{episode.season} Эпизод №{episode.episode}</h2>
-                <div className='d-flex align-items-center gap-2'>
+                <div className='d-flex align-items-center gap-3'>
                     <Button variant="primary" onClick={()=>minus(episode.episode_id)}>-</Button>
                     {episode.characters.length}
                     <Button variant="primary" onClick={()=>plus(episode.episode_id)}>+</Button>

@@ -1,10 +1,13 @@
-version: '3'
+version: "3"
 services:
-  web:
-    build: .
-    command: npm start
-    volumes:
-      - .:/usr/app/
-      - /usr/app/node_modules
+  frontend:
+    image: node:16.15.1-alpine
     ports:
       - "3000:3000"
+    working_dir: /app
+    command: sh -c "npm i && npm run start"
+    volumes:
+      - .:/app:rw
+      - node_modules:/src/node_modules
+volumes:
+  node_modules:
