@@ -28,6 +28,10 @@ const SortDataButtonsGroup = () => {
         setUp(false)
         setDown(true)
     }
+
+    if(!episodes || episodes.length === 0){
+        return null
+    }
     return (
         <Row className="d-inline-flex flex-column">
             <Col className="d-inline-flex flex-column gap-3" xxl={5}>

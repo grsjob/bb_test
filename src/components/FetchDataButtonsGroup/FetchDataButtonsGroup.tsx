@@ -12,7 +12,7 @@ const FetchDataButtonsGroup = () => {
         return (
             <Row>
                 <Col>
-                    <Button variant="primary" onClick={load}>Загрузить эпизоды</Button>
+                    <Button variant="primary" onClick={load} className="mb-3">Загрузить эпизоды</Button>
                 </Col>
             </Row>
         );
