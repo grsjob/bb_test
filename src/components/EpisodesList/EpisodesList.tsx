@@ -15,9 +15,8 @@ const EpisodesList = () => {
                         )}
             </ListGroup>
         )
-    } else {
-        return null
     }
+    return null
 };
 
 export default EpisodesList;

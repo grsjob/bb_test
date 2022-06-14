@@ -59,7 +59,11 @@ async function setEpisodesSlice(
     firstEpisodeIndex: number,
     lastEpisodeIndex: number) {
     const slice = episodes.slice(firstEpisodeIndex, lastEpisodeIndex)
+
     if (slice && slice.length !== 0) {
         store.dispatch(setCurrentEpisodes(slice))
+    }
+    if(episodes.length === 0){
+        store.dispatch(setCurrentEpisodes([]))
     }
 }
