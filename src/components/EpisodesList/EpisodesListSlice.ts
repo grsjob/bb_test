@@ -15,7 +15,8 @@ const slice = createSlice({
     initialState,
     reducers:{
         loadEpisodes: (state, {payload: episodes}: PayloadAction<IEpisode[]>) =>{
-            state.episodes = episodes
+            const bBEpisodes = episodes.filter(episode => episode.series === 'Breaking Bad')
+            state.episodes = bBEpisodes
         },
         deleteEpisode:(state, {payload: id}: PayloadAction<number>) =>{
             state.episodes = state.episodes.filter(episode => episode.episode_id !== id)

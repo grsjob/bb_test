@@ -19,13 +19,13 @@ const Pagination = () => {
 
 
     useEffect(() => {
-        setEpisodesSlice(episodes,firstEpisodeIndex, lastEpisodeIndex )
+        setEpisodesSlice(episodes, firstEpisodeIndex, lastEpisodeIndex)
         const pagesNumbersArray = []
         for (let i = 1; i <= Math.ceil(episodes.length / episodesPerPage); i++) {
             pagesNumbersArray.push(i)
         }
         store.dispatch(setPageNumbers(pagesNumbersArray))
-    }, [episodes,currentPage])
+    }, [episodes, currentPage])
 
 
     return (
@@ -33,9 +33,14 @@ const Pagination = () => {
             <ul className="d-flex gap-3" style={{listStyle: 'none'}}>
                 {
                     pagesNumbers.map(number => (
-                        <li key={number}>
-                            <Button variant="outline-primary" onClick={()=>paginate(number)}>{number}</Button>
-                        </li>
+                        number === currentPage ?
+                            <li key={number}>
+                                <Button variant="outline-primary" onClick={() => paginate(number)} active>{number}</Button>
+                            </li>
+                            :
+                            <li key={number}>
+                                <Button variant="outline-primary" onClick={() => paginate(number)}>{number}</Button>
+                            </li>
                     ))
                 }
             </ul>
@@ -48,9 +53,10 @@ export default Pagination;
 const paginate = (pageNumber: number) => {
     store.dispatch(setCurrentPage(pageNumber))
 }
-async function setEpisodesSlice(episodes:IEpisode[],firstEpisodeIndex:number,lastEpisodeIndex:number){
-     const arr = episodes.slice(firstEpisodeIndex, lastEpisodeIndex)
-    if(arr && arr.length !==0){
+
+async function setEpisodesSlice(episodes: IEpisode[], firstEpisodeIndex: number, lastEpisodeIndex: number) {
+    const arr = episodes.slice(firstEpisodeIndex, lastEpisodeIndex)
+    if (arr && arr.length !== 0) {
         store.dispatch(setCurrentEpisodes(arr))
     }
 }
