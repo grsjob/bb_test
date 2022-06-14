@@ -29,7 +29,7 @@ async function load(){
         store.dispatch(loadBBEpisodes(episodes))
         store.dispatch(sortByEpisodeNumber())
     } catch (e) {
-        console.log(e) //TODO Errors
+        console.log(e)
     }
 }
 

@@ -4,6 +4,7 @@ import App from "./App";
 import {store} from "../../state/store";
 import {loadingStart, loadingSuccess} from "./AppSlice";
 import {unmountComponentAtNode, render} from "react-dom";
+import {createRoot} from "react-dom/client";
 
 
 describe('AppSlice testing', function (){
@@ -42,20 +43,17 @@ describe('App component testing', function () {
         container = document.createElement("div");
         document.body.appendChild(container);
     })
-    afterEach(()=>{
-        unmountComponentAtNode(container);
-        container.remove();
-    });
+
 
     it('should be render Spinner if loading = true', async ()=> {
         await act(async()=>{
             store.dispatch(loadingStart())
         })
         act(() => {
-            render(<App />, container);
+            const root = createRoot(container)
+            root.render(<App />);
         });
         let spinner = document.querySelector('.spinner')
-        console.log(spinner)
         expect(spinner).toBeTruthy()
 
     });
