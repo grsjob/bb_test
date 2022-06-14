@@ -21,7 +21,7 @@ const App = () => {
             </Stack>
             {loading &&
                 <Col className='text-center' >
-                    <Spinner animation='border'/>
+                    <Spinner animation='border' className='spinner' />
                 </Col>}
             <SortDataButtonsGroup/>
             <EpisodesList/>

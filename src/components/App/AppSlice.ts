@@ -13,7 +13,7 @@ const slice = createSlice({
     name: 'app',
     initialState,
     reducers: {
-        loading: (state) => {
+        loadingStart: (state) => {
             state.loading = true
         },
         loadingSuccess: (state) => {
@@ -23,6 +23,6 @@ const slice = createSlice({
     }
 })
 
-export const {loading,loadingSuccess} = slice.actions
+export const {loadingStart,loadingSuccess} = slice.actions
 
 export default slice.reducer

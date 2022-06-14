@@ -4,7 +4,7 @@ import DataService from "../../services/DataService";
 import {useStore} from "../../state/storeHooks";
 import {loadBBEpisodes, sortByEpisodeNumber} from "../EpisodesList/EpisodesListSlice";
 import {store} from "../../state/store";
-import {loading, loadingSuccess} from "../App/AppSlice";
+import {loadingStart, loadingSuccess} from "../App/AppSlice";
 
 const FetchDataButtonsGroup = () => {
     const {episodes} = useStore(({list}) => list)
@@ -23,7 +23,7 @@ export default FetchDataButtonsGroup;
 
 async function load(){
     try {
-        store.dispatch(loading())
+        store.dispatch(loadingStart())
         const episodes = await DataService.fetchData()
         store.dispatch(loadingSuccess())
         store.dispatch(loadBBEpisodes(episodes))
