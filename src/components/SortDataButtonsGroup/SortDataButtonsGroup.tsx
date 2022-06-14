@@ -16,7 +16,7 @@ const SortDataButtonsGroup = () => {
         if(down){
             store.dispatch(sortByCharactersDown())
         }
-    },[episodes] )
+    },[episodes, up, down] )
 
     function sortActorsUp(){
         store.dispatch(sortByCharactersUp())

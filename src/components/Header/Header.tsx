@@ -1,13 +1,11 @@
 import React from 'react';
-import {Col, Row} from "react-bootstrap";
+import {Col} from "react-bootstrap";
 
 const Header = () => {
     return (
-        <Row as='h1'>
-            <Col>
+            <Col as='h1' className='d-flex justify-content-center'>
                 Список эпизодов Breaking Bad
             </Col>
-        </Row>
     );
 };
 

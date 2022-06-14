@@ -1,14 +1,12 @@
-import React, {useCallback, useMemo, useState} from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from '../Header/Header';
-import {Container, ListGroup, Spinner, Stack} from "react-bootstrap";
+import {Col, Container, Spinner, Stack} from "react-bootstrap";
 import FetchDataButtonsGroup from "../FetchDataButtonsGroup/FetchDataButtonsGroup";
 import EpisodesList from "../EpisodesList/EpisodesList";
 import SortDataButtonsGroup from "../SortDataButtonsGroup/SortDataButtonsGroup";
 import {useStore} from "../../state/storeHooks";
-import Pagination from "../Pagination/Pagination";
-import {store} from "../../state/store";
-import {setCurrentEpisodes} from "../Pagination/PaginationSlice";
+import Pagination from '../Pagination/Pagination';
 
 
 const App = () => {
@@ -16,12 +14,15 @@ const App = () => {
 
 
     return (
-        <Container className="container d-xxl-inline-flex flex-column">
+        <Container className="container d-xxl-inline-flex flex-column justify-content-center">
             <Stack  gap={3}>
                 <Header/>
                 <FetchDataButtonsGroup/>
             </Stack>
-            {loading && <Spinner animation='border'/>}
+            {loading &&
+                <Col className='text-center' >
+                    <Spinner animation='border'/>
+                </Col>}
             <SortDataButtonsGroup/>
             <EpisodesList/>
             <Pagination />

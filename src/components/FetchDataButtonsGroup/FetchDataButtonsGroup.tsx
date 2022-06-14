@@ -1,8 +1,8 @@
 import React from 'react';
-import {Button, Col, Row} from "react-bootstrap";
+import {Button, Col} from "react-bootstrap";
 import DataService from "../../services/DataService";
 import {useStore} from "../../state/storeHooks";
-import {loadEpisodes, sortByEpisodeNumber} from "../EpisodesList/EpisodesListSlice";
+import {loadBBEpisodes, sortByEpisodeNumber} from "../EpisodesList/EpisodesListSlice";
 import {store} from "../../state/store";
 import {loading, loadingSuccess} from "../App/AppSlice";
 
@@ -10,11 +10,9 @@ const FetchDataButtonsGroup = () => {
     const {episodes} = useStore(({list}) => list)
     if(!episodes.length || episodes.length === 0) {
         return (
-            <Row>
-                <Col>
+                <Col className='d-flex justify-content-center'>
                     <Button variant="primary" onClick={load} className="mb-3">Загрузить эпизоды</Button>
                 </Col>
-            </Row>
         );
     } else{
         return null
@@ -28,7 +26,7 @@ async function load(){
         store.dispatch(loading())
         const episodes = await DataService.fetchData()
         store.dispatch(loadingSuccess())
-        store.dispatch(loadEpisodes(episodes))
+        store.dispatch(loadBBEpisodes(episodes))
         store.dispatch(sortByEpisodeNumber())
     } catch (e) {
         console.log(e) //TODO Errors
