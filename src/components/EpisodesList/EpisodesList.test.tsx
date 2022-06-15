@@ -1,5 +1,6 @@
-import {act, render} from "@testing-library/react";
+import {act, fireEvent, render, screen} from "@testing-library/react";
 import {store} from "../../state/store";
+import '@testing-library/jest-dom'
 import {
     deleteEpisode,
     loadBBEpisodes,
@@ -8,39 +9,42 @@ import {
     sortByEpisodeNumber,
     sortByCharactersDown,
     sortByCharactersUp} from "./EpisodesListSlice";
+import EpisodesList from "./EpisodesList";
+import App from "../App/App";
+import userEvent from "@testing-library/user-event";
 
+const ep = [
+    {
+        air_date: '01-20-2008',
+        characters: ['Walter White', 'Jesse Pinkman'],
+        episode: "1",
+        episode_id: 1,
+        season: '1',
+        series: "Breaking Bad",
+        title: 'Pilot',
+    },
+    {
+        air_date: '01-20-2008',
+        characters: ['Walter White', 'Jesse Pinkman', 'Jesse Pinkman'],
+        episode: "2",
+        episode_id: 2,
+        season: '1',
+        series: "Breaking Bad",
+        title: 'Went',
+    },
+    {
+        air_date: '01-20-2008',
+        characters: ['Walter White', 'Jesse Pinkman'],
+        episode: "3",
+        episode_id: 3,
+        season: '1',
+        series: "Bad",
+        title: 'Go',
+    },
+
+]
 
 describe('EpisodesListSlice testing', function () {
-    const ep = [
-        {
-            air_date: '01-20-2008',
-            characters: ['Walter White', 'Jesse Pinkman'],
-            episode: "1",
-            episode_id: 1,
-            season: '1',
-            series: "Breaking Bad",
-            title: 'Pilot',
-        },
-        {
-            air_date: '01-20-2008',
-            characters: ['Walter White', 'Jesse Pinkman', 'Jesse Pinkman'],
-            episode: "2",
-            episode_id: 2,
-            season: '1',
-            series: "Breaking Bad",
-            title: 'Went',
-        },
-        {
-            air_date: '01-20-2008',
-            characters: ['Walter White', 'Jesse Pinkman'],
-            episode: "3",
-            episode_id: 3,
-            season: '1',
-            series: "Bad",
-            title: 'Go',
-        },
-
-    ]
 
 
     beforeEach(async () => {
@@ -142,5 +146,17 @@ describe('EpisodesListSlice testing', function () {
             const episodes = store.getState().list.episodes
             expect(episodes[index].characters.length < episodes[index+1].characters.length ).toBeTruthy()
         });
+    });
+});
+describe('component EpisodesList testing', function () {
+    beforeEach(() => {
+        act(() => {
+            store.dispatch(loadBBEpisodes(ep))
+            render(<App />);
+        });
+    });
+    it('should be render 2 list items', function () {
+        expect(screen.getByText('Сезон №1 Эпизод №2')).toBeInTheDocument()
+        expect(screen.getByText('Сезон №1 Эпизод №1')).toBeInTheDocument()
     });
 });
