@@ -50,11 +50,11 @@ const Pagination = () => {
 
 export default Pagination;
 
-const paginate = (pageNumber: number) => {
+export const paginate = (pageNumber: number) => {
     store.dispatch(setCurrentPage(pageNumber))
 }
 
-async function setEpisodesSlice(
+export async function setEpisodesSlice(
     episodes: IEpisode[],
     firstEpisodeIndex: number,
     lastEpisodeIndex: number) {
